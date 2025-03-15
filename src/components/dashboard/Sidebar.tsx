@@ -4,11 +4,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import { 
   Bot, PhoneCall, Clock, Users, Webhook, Puzzle, 
-  ChevronDown, ChevronUp, Settings, Key, User, Receipt, X, Menu
+  ChevronDown, ChevronUp, Settings, Key, User, Receipt, X, Menu, Search, Captions
 } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 
 interface SidebarProps {
   isMobile: boolean;
@@ -19,6 +21,7 @@ interface SidebarProps {
 const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
   const location = useLocation();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [settingsSearch, setSettingsSearch] = useState('');
   const creditBalance = 75; // Example value (percentage)
 
   const menuItems = [
@@ -31,10 +34,47 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
   ];
 
   const settingsMenuItems = [
-    { id: 'credentials', label: 'Credentials', icon: Key, path: '/settings?tab=credentials' },
-    { id: 'users', label: 'Users', icon: User, path: '/settings?tab=users' },
-    { id: 'billing', label: 'Billing Overview', icon: Receipt, path: '/settings?tab=billing' }
+    { 
+      id: 'account', 
+      label: 'Account', 
+      subtitle: 'Manage account settings',
+      icon: User, 
+      items: [
+        { id: 'credentials', label: 'API Credentials', icon: Key, path: '/settings?tab=credentials' },
+        { id: 'users', label: 'Team Members', icon: User, path: '/settings?tab=users' }
+      ]
+    },
+    { 
+      id: 'billing', 
+      label: 'Billing', 
+      subtitle: 'Manage subscription and payments',
+      icon: Receipt, 
+      items: [
+        { id: 'billing', label: 'Billing Overview', icon: Receipt, path: '/settings?tab=billing' }
+      ]
+    }
   ];
+
+  const filterSettingsItems = (query: string) => {
+    if (!query) return settingsMenuItems;
+    
+    return settingsMenuItems
+      .map(category => {
+        // Filter items within each category
+        const filteredItems = category.items.filter(item => 
+          item.label.toLowerCase().includes(query.toLowerCase())
+        );
+        
+        // Only include categories that have matching items
+        if (filteredItems.length > 0) {
+          return { ...category, items: filteredItems };
+        }
+        return null;
+      })
+      .filter(Boolean) as typeof settingsMenuItems;
+  };
+
+  const filteredSettingsMenuItems = filterSettingsItems(settingsSearch);
 
   if (!isSidebarOpen && isMobile) {
     return (
@@ -129,17 +169,47 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
             </div>
             
             {isSettingsOpen && (
-              <div className="pl-4 pt-1.5 space-y-1.5">
-                {settingsMenuItems.map((item) => (
-                  <Link
-                    key={item.id}
-                    to={item.path}
-                    className="sidebar-item text-xs"
-                  >
-                    <item.icon size={14} className="min-w-4" />
-                    <span className="truncate">{item.label}</span>
-                  </Link>
-                ))}
+              <div className="pl-4 pt-3 space-y-3">
+                <div className="px-2">
+                  <Input
+                    type="text"
+                    placeholder="Search settings..."
+                    value={settingsSearch}
+                    onChange={(e) => setSettingsSearch(e.target.value)}
+                    className="h-7 text-xs"
+                    prefix={<Search size={12} className="mr-1.5 text-sidebar-foreground/60" />}
+                  />
+                </div>
+                
+                {filteredSettingsMenuItems.length > 0 ? (
+                  filteredSettingsMenuItems.map((category) => (
+                    <div key={category.id} className="space-y-1.5">
+                      <div className="flex items-center px-2 text-[11px] text-sidebar-foreground/60 font-medium">
+                        <Captions size={12} className="mr-1.5" />
+                        <span>{category.label}</span>
+                      </div>
+                      <div className="text-[10px] px-2 -mt-1 mb-1.5 text-sidebar-foreground/50">
+                        {category.subtitle}
+                      </div>
+                      <div className="space-y-1">
+                        {category.items.map((item) => (
+                          <Link
+                            key={item.id}
+                            to={item.path}
+                            className="sidebar-item text-xs py-1.5"
+                          >
+                            <item.icon size={14} className="min-w-4" />
+                            <span className="truncate">{item.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="px-2 py-3 text-center text-xs text-sidebar-foreground/50">
+                    No settings match your search
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -154,19 +224,48 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
                 <ChevronUp size={14} />
               </div>
             </PopoverTrigger>
-            <PopoverContent className="w-56 p-0" align="end" side="top">
-              <div className="py-1">
-                {settingsMenuItems.map((item) => (
-                  <Link
-                    key={item.id}
-                    to={item.path}
-                    className="flex items-center gap-2 px-3 py-2 text-xs cursor-pointer hover:bg-sidebar-accent transition-colors"
-                  >
-                    <item.icon size={14} className="min-w-4" />
-                    <span className="truncate">{item.label}</span>
-                  </Link>
-                ))}
-              </div>
+            <PopoverContent className="w-64 p-2" align="end" side="top">
+              <Command className="rounded-lg border shadow-md">
+                <CommandInput 
+                  placeholder="Search settings..." 
+                  value={settingsSearch}
+                  onValueChange={setSettingsSearch}
+                  className="h-8 text-xs"
+                />
+                <CommandList>
+                  {filteredSettingsMenuItems.length > 0 ? (
+                    filteredSettingsMenuItems.map((category) => (
+                      <CommandGroup key={category.id} heading={
+                        <div className="flex items-center text-xs">
+                          <Captions size={12} className="mr-1.5" />
+                          <span>{category.label}</span>
+                        </div>
+                      } className="py-1.5">
+                        <div className="text-[10px] px-2 -mt-1 mb-1.5 text-sidebar-foreground/50">
+                          {category.subtitle}
+                        </div>
+                        {category.items.map((item) => (
+                          <CommandItem
+                            key={item.id}
+                            value={item.id}
+                            className="text-xs flex items-center gap-2 py-1.5"
+                            onSelect={() => {
+                              window.location.href = item.path;
+                            }}
+                          >
+                            <item.icon size={14} className="min-w-4" />
+                            <span>{item.label}</span>
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    ))
+                  ) : (
+                    <CommandEmpty className="py-3 text-xs">
+                      No settings match your search
+                    </CommandEmpty>
+                  )}
+                </CommandList>
+              </Command>
             </PopoverContent>
           </Popover>
         ) : (
