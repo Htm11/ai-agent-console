@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -78,12 +79,18 @@ const getTypeColor = (type: AIAgent['type']) => {
 };
 
 const AIAgentsPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleNewAgent = () => {
+    navigate('/launch-ai');
+  };
+
   return (
     <DashboardLayout>
       <div className="animate-fade-in space-y-4">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">AI Agents</h1>
-          <Button className="gap-2">
+          <Button className="gap-2" onClick={handleNewAgent}>
             <Plus size={16} />
             New Agent
           </Button>
