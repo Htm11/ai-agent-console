@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import { 
   Bot, PhoneCall, Clock, Users, Webhook, Puzzle, 
-  Play, ChevronDown, ChevronUp, Settings, Key, User, Receipt, X, Menu
+  ChevronDown, ChevronUp, Settings, Key, User, Receipt, X, Menu
 } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -27,8 +27,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
     { id: 'call-logs', label: 'Call Logs', icon: Clock, path: '/call-logs' },
     { id: 'contacts', label: 'Contacts', icon: Users, path: '/contacts' },
     { id: 'webhooks', label: 'Webhooks', icon: Webhook, path: '/webhooks' },
-    { id: 'integrations', label: 'Integrations', icon: Puzzle, path: '/integrations' },
-    { id: 'launch-ai', label: 'Launch AI', icon: Play, path: '/launch-ai', highlight: true }
+    { id: 'integrations', label: 'Integrations', icon: Puzzle, path: '/integrations' }
   ];
 
   const settingsMenuItems = [
@@ -43,7 +42,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
         onClick={toggleSidebar}
         className="fixed top-4 left-4 p-2 bg-background border rounded-md shadow-sm z-50"
       >
-        <Menu size={18} />
+        <Menu size={16} />
       </button>
     );
   }
@@ -51,24 +50,24 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
   return (
     <div className={cn(
       "h-screen bg-sidebar relative flex flex-col border-r overflow-hidden transition-all duration-300 ease-in-out animate-fade-in",
-      isMobile ? "fixed z-40 w-64" : "w-64",
-      !isSidebarOpen && !isMobile && "w-16"
+      isMobile ? "fixed z-40 w-60" : "w-60",
+      !isSidebarOpen && !isMobile && "w-14"
     )}>
       {isMobile && (
         <button 
           onClick={toggleSidebar} 
-          className="absolute top-4 right-4 p-1 rounded-full hover:bg-sidebar-accent"
+          className="absolute top-3 right-3 p-1 rounded-full hover:bg-sidebar-accent"
         >
-          <X size={18} className="text-sidebar-foreground" />
+          <X size={16} className="text-sidebar-foreground" />
         </button>
       )}
       
-      <div className="p-4 flex items-center">
-        <div className="w-8 h-8 mr-3 rounded-md bg-primary flex items-center justify-center">
-          <Bot size={16} className="text-primary-foreground" />
+      <div className="p-3 flex items-center">
+        <div className="w-7 h-7 mr-3 rounded-md bg-primary/80 flex items-center justify-center">
+          <Bot size={14} className="text-primary-foreground" />
         </div>
         {(isSidebarOpen || isMobile) && (
-          <h1 className="text-lg font-semibold">Voice Agents</h1>
+          <h1 className="text-base font-semibold">Voice Agents</h1>
         )}
       </div>
       
@@ -80,21 +79,16 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
               key={item.id}
               to={item.path}
               className={cn(
-                "sidebar-item mb-1 group",
-                isActive && "active",
-                item.highlight && "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
+                "sidebar-item mb-1.5 group",
+                isActive && "active"
               )}
             >
-              <item.icon size={18} className={cn(
+              <item.icon size={16} className={cn(
                 "transition-transform duration-200",
-                !isSidebarOpen && !isMobile && "ml-1",
-                item.highlight ? "text-primary-foreground" : "text-sidebar-foreground"
+                !isSidebarOpen && !isMobile && "ml-0.5"
               )} />
               {(isSidebarOpen || isMobile) && (
-                <span className={item.highlight ? "text-primary-foreground" : ""}>{item.label}</span>
-              )}
-              {item.highlight && (isSidebarOpen || isMobile) && (
-                <span className="ml-auto px-1.5 py-0.5 bg-white/20 rounded text-xs font-semibold">New</span>
+                <span className="text-sm">{item.label}</span>
               )}
             </Link>
           );
@@ -102,7 +96,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
       </div>
       
       <div className="p-3 border-t">
-        <div className="bg-sidebar-accent/50 rounded-lg p-2.5 mb-2">
+        <div className="bg-sidebar-accent/50 rounded-lg p-2 mb-2">
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs font-medium">Credit Balance</span>
             <span className="text-xs font-bold">{creditBalance}%</span>
@@ -119,14 +113,14 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
         {isMobile ? (
           <div>
             <div 
-              className="sidebar-item mb-1"
+              className="sidebar-item mb-1 text-sm"
               onClick={() => setIsSettingsOpen(!isSettingsOpen)}
             >
-              <Settings size={18} />
+              <Settings size={16} />
               <span>General Settings</span>
               {isSettingsOpen ? 
-                <ChevronUp size={16} className="ml-auto" /> : 
-                <ChevronDown size={16} className="ml-auto" />
+                <ChevronUp size={14} className="ml-auto" /> : 
+                <ChevronDown size={14} className="ml-auto" />
               }
             </div>
             
@@ -136,9 +130,9 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
                   <Link
                     key={item.id}
                     to={item.path}
-                    className="sidebar-item mb-1"
+                    className="sidebar-item mb-1 text-sm"
                   >
-                    <item.icon size={16} />
+                    <item.icon size={14} />
                     <span>{item.label}</span>
                   </Link>
                 ))}
@@ -148,10 +142,10 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
         ) : isSidebarOpen ? (
           <Popover>
             <PopoverTrigger asChild>
-              <div className="sidebar-item mb-1 cursor-pointer">
-                <Settings size={18} />
+              <div className="sidebar-item mb-1 cursor-pointer text-sm">
+                <Settings size={16} />
                 <span>General Settings</span>
-                <ChevronUp size={16} className="ml-auto" />
+                <ChevronUp size={14} className="ml-auto" />
               </div>
             </PopoverTrigger>
             <PopoverContent className="w-56 p-0" align="end" side="top">
@@ -160,9 +154,9 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
                   <Link
                     key={item.id}
                     to={item.path}
-                    className="flex items-center gap-3 px-3 py-2 text-sm cursor-pointer hover:bg-sidebar-accent transition-colors"
+                    className="flex items-center gap-3 px-3 py-2 text-xs cursor-pointer hover:bg-sidebar-accent transition-colors"
                   >
-                    <item.icon size={16} />
+                    <item.icon size={14} />
                     <span>{item.label}</span>
                   </Link>
                 ))}
@@ -171,7 +165,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
           </Popover>
         ) : (
           <div className="flex justify-center">
-            <Settings size={18} className="cursor-pointer" />
+            <Settings size={16} className="cursor-pointer" />
           </div>
         )}
       </div>
