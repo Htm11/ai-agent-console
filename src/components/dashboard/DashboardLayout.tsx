@@ -60,7 +60,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 onClick={toggleDesktopSidebar}
                 className="p-1 rounded-md hover:bg-muted transition-colors"
               >
-                {isSidebarOpen ? <ChevronLeft size={14} /> : <ChevronRight size={14} />}
+                {isSidebarOpen ? <ChevronLeft size={12} /> : <ChevronRight size={12} />}
               </button>
             )}
             
@@ -69,12 +69,12 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 onClick={toggleMobileSidebar}
                 className="p-1 rounded-md hover:bg-muted transition-colors"
               >
-                <ChevronRight size={14} />
+                <ChevronRight size={12} />
               </button>
             )}
             
             <div className="ml-2">
-              <h1 className="text-base font-semibold">AI Voice Agents Dashboard</h1>
+              <h1 className="text-sm font-semibold">Callab AI Dashboard</h1>
             </div>
           </div>
         </div>

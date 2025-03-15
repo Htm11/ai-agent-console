@@ -62,12 +62,15 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
         </button>
       )}
       
-      <div className="p-3 flex items-center">
-        <div className="w-7 h-7 mr-3 rounded-md bg-primary/80 flex items-center justify-center">
-          <Bot size={14} className="text-primary-foreground" />
-        </div>
-        {(isSidebarOpen || isMobile) && (
-          <h1 className="text-base font-semibold">Voice Agents</h1>
+      <div className="p-4 flex items-center justify-center">
+        {(isSidebarOpen || isMobile) ? (
+          <img 
+            src="/lovable-uploads/8d387d20-f6d7-4ae4-9083-cb9133b1580e.png" 
+            alt="Callab AI Logo" 
+            className="h-8" 
+          />
+        ) : (
+          <div className="w-7 h-7 rounded-full bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400"></div>
         )}
       </div>
       
@@ -79,16 +82,16 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
               key={item.id}
               to={item.path}
               className={cn(
-                "sidebar-item mb-1.5 group",
+                "sidebar-item mb-1 text-xs group",
                 isActive && "active"
               )}
             >
-              <item.icon size={16} className={cn(
+              <item.icon size={14} className={cn(
                 "transition-transform duration-200",
                 !isSidebarOpen && !isMobile && "ml-0.5"
               )} />
               {(isSidebarOpen || isMobile) && (
-                <span className="text-sm">{item.label}</span>
+                <span>{item.label}</span>
               )}
             </Link>
           );
@@ -113,14 +116,14 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
         {isMobile ? (
           <div>
             <div 
-              className="sidebar-item mb-1 text-sm"
+              className="sidebar-item mb-1 text-xs"
               onClick={() => setIsSettingsOpen(!isSettingsOpen)}
             >
-              <Settings size={16} />
+              <Settings size={14} />
               <span>General Settings</span>
               {isSettingsOpen ? 
-                <ChevronUp size={14} className="ml-auto" /> : 
-                <ChevronDown size={14} className="ml-auto" />
+                <ChevronUp size={12} className="ml-auto" /> : 
+                <ChevronDown size={12} className="ml-auto" />
               }
             </div>
             
@@ -130,9 +133,9 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
                   <Link
                     key={item.id}
                     to={item.path}
-                    className="sidebar-item mb-1 text-sm"
+                    className="sidebar-item mb-1 text-xs"
                   >
-                    <item.icon size={14} />
+                    <item.icon size={12} />
                     <span>{item.label}</span>
                   </Link>
                 ))}
@@ -142,10 +145,10 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
         ) : isSidebarOpen ? (
           <Popover>
             <PopoverTrigger asChild>
-              <div className="sidebar-item mb-1 cursor-pointer text-sm">
-                <Settings size={16} />
+              <div className="sidebar-item mb-1 cursor-pointer text-xs">
+                <Settings size={14} />
                 <span>General Settings</span>
-                <ChevronUp size={14} className="ml-auto" />
+                <ChevronUp size={12} className="ml-auto" />
               </div>
             </PopoverTrigger>
             <PopoverContent className="w-56 p-0" align="end" side="top">
@@ -154,9 +157,9 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
                   <Link
                     key={item.id}
                     to={item.path}
-                    className="flex items-center gap-3 px-3 py-2 text-xs cursor-pointer hover:bg-sidebar-accent transition-colors"
+                    className="flex items-center gap-2 px-3 py-2 text-xs cursor-pointer hover:bg-sidebar-accent transition-colors"
                   >
-                    <item.icon size={14} />
+                    <item.icon size={12} />
                     <span>{item.label}</span>
                   </Link>
                 ))}
@@ -165,7 +168,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
           </Popover>
         ) : (
           <div className="flex justify-center">
-            <Settings size={16} className="cursor-pointer" />
+            <Settings size={14} className="cursor-pointer" />
           </div>
         )}
       </div>
