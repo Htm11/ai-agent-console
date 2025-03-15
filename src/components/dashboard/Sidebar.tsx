@@ -49,7 +49,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
 
   return (
     <div className={cn(
-      "h-screen bg-sidebar text-sidebar-foreground relative flex flex-col border-r overflow-hidden transition-all duration-300 ease-in-out",
+      "h-screen text-sidebar-foreground relative flex flex-col border-r overflow-hidden transition-all duration-300 ease-in-out",
       isMobile ? "fixed z-40 w-64" : "w-64",
       !isSidebarOpen && !isMobile && "w-16"
     )}>

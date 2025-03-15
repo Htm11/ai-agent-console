@@ -39,7 +39,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         />
       )}
       
-      {/* Sidebar for mobile */}
+      {/* Overlay for mobile sidebar */}
       {isMobile && isMobileSidebarOpen && (
         <div className="fixed inset-0 bg-black/50 z-30" onClick={toggleMobileSidebar}></div>
       )}
@@ -76,8 +76,6 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               
               <h1 className="text-sm font-semibold">Callab AI Dashboard</h1>
             </div>
-            
-            {/* You can add user profile or additional header elements here */}
           </div>
         </div>
         
