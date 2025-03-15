@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Bot, Phone, Activity, ArrowUpRight } from 'lucide-react';
+import { Bot, Phone, Activity, ArrowUpRight, PlayCircle } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -91,7 +91,7 @@ const DashboardContent = () => {
       
       <div className="mt-12">
         <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-          <Play className="mr-2 h-4 w-4" />
+          <PlayCircle className="mr-2 h-4 w-4" />
           Launch New AI Agent
         </Button>
       </div>

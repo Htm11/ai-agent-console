@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { cn } from "@/lib/utils";
 import { 
-  Bot, PhoneCall, Clock, Users, Webhook, PuzzlePiece, 
+  Bot, PhoneCall, Clock, Users, Webhook, Puzzle, 
   Play, ChevronDown, ChevronUp, Settings, Key, User, Receipt, X, Menu
 } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
@@ -26,7 +26,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
     { id: 'call-logs', label: 'Call Logs', icon: Clock },
     { id: 'contacts', label: 'Contacts', icon: Users },
     { id: 'webhooks', label: 'Webhooks', icon: Webhook },
-    { id: 'integrations', label: 'Integrations', icon: PuzzlePiece },
+    { id: 'integrations', label: 'Integrations', icon: Puzzle },
     { id: 'launch-ai', label: 'Launch AI', icon: Play, highlight: true }
   ];
 
