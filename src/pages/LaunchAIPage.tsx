@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { 
   Bot, Sparkles, UserCircle, Phone, MessageSquare, 
-  Clock, ShieldCheck, LucideHeadphones, Building, CreditCard 
+  Clock, ShieldCheck, LucideHeadphones, Building, CreditCard, FileText 
 } from 'lucide-react';
 import { 
   Tabs, TabsContent, TabsList, TabsTrigger 
