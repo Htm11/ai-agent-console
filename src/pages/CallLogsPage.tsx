@@ -5,8 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CallLogsList from '@/components/call-logs/CallLogsList';
 import { CallLog } from '@/types/call-logs';
 
-// Mock data for call logs
-const mockCallLogs: CallLog[] = [
+// Mock data for call logs - export so it can be used in the detail page
+export const mockCallLogs: CallLog[] = [
   {
     id: '1',
     callerId: '+1234567890',

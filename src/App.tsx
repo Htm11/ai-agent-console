@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import AIAgentsPage from "./pages/AIAgentsPage";
 import ActiveNumbersPage from "./pages/ActiveNumbersPage";
 import CallLogsPage from "./pages/CallLogsPage";
+import CallLogDetailPage from "./pages/CallLogDetailPage";
 import ContactsPage from "./pages/ContactsPage";
 import WebhooksPage from "./pages/WebhooksPage";
 import IntegrationsPage from "./pages/IntegrationsPage";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/ai-agents" element={<AIAgentsPage />} />
           <Route path="/active-numbers" element={<ActiveNumbersPage />} />
           <Route path="/call-logs" element={<CallLogsPage />} />
+          <Route path="/call-logs/:id" element={<CallLogDetailPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/webhooks" element={<WebhooksPage />} />
           <Route path="/integrations" element={<IntegrationsPage />} />
