@@ -41,7 +41,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       
       {/* Sidebar for mobile */}
       {isMobile && isMobileSidebarOpen && (
-        <div className="fixed inset-0 bg-black/30 z-30" onClick={toggleMobileSidebar}></div>
+        <div className="fixed inset-0 bg-black/50 z-30" onClick={toggleMobileSidebar}></div>
       )}
       
       {isMobile && (
@@ -74,7 +74,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             )}
             
             <div className="ml-3">
-              <h1 className="text-base font-semibold">AI Voice Agents Dashboard</h1>
+              <h1 className="text-lg font-semibold">AI Voice Agents Dashboard</h1>
             </div>
           </div>
         </div>
