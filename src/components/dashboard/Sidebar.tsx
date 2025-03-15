@@ -51,28 +51,28 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
   return (
     <div className={cn(
       "h-screen bg-sidebar relative flex flex-col border-r overflow-hidden transition-all duration-300 ease-in-out animate-fade-in",
-      isMobile ? "fixed z-40 w-60" : "w-60",
-      !isSidebarOpen && !isMobile && "w-14"
+      isMobile ? "fixed z-40 w-64" : "w-64",
+      !isSidebarOpen && !isMobile && "w-16"
     )}>
       {isMobile && (
         <button 
           onClick={toggleSidebar} 
-          className="absolute top-3 right-3 p-1 rounded-full hover:bg-sidebar-accent"
+          className="absolute top-4 right-4 p-1 rounded-full hover:bg-sidebar-accent"
         >
-          <X size={16} className="text-sidebar-foreground" />
+          <X size={18} className="text-sidebar-foreground" />
         </button>
       )}
       
-      <div className="p-3 flex items-center">
-        <div className="w-7 h-7 mr-2.5 rounded-md bg-primary/10 flex items-center justify-center">
-          <Bot size={14} className="text-primary-foreground" />
+      <div className="p-4 flex items-center">
+        <div className="w-8 h-8 mr-3 rounded-md bg-primary flex items-center justify-center">
+          <Bot size={16} className="text-primary-foreground" />
         </div>
         {(isSidebarOpen || isMobile) && (
-          <h1 className="text-base font-semibold">Voice Agents</h1>
+          <h1 className="text-lg font-semibold">Voice Agents</h1>
         )}
       </div>
       
-      <div className="px-2 py-1 flex-1 overflow-y-auto menu-animation">
+      <div className="px-2 py-2 flex-1 overflow-y-auto menu-animation">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
@@ -80,34 +80,34 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
               key={item.id}
               to={item.path}
               className={cn(
-                "sidebar-item mb-0.5 group",
+                "sidebar-item mb-1 group",
                 isActive && "active",
-                item.highlight && "text-primary-foreground hover:text-primary-foreground"
+                item.highlight && "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
               )}
             >
-              <item.icon size={16} className={cn(
+              <item.icon size={18} className={cn(
                 "transition-transform duration-200",
-                !isSidebarOpen && !isMobile && "ml-0.5",
-                item.highlight ? "text-[#9b87f5]" : "text-sidebar-foreground"
+                !isSidebarOpen && !isMobile && "ml-1",
+                item.highlight ? "text-primary-foreground" : "text-sidebar-foreground"
               )} />
               {(isSidebarOpen || isMobile) && (
-                <span className={item.highlight ? "text-[#9b87f5] font-medium" : ""}>{item.label}</span>
+                <span className={item.highlight ? "text-primary-foreground" : ""}>{item.label}</span>
               )}
               {item.highlight && (isSidebarOpen || isMobile) && (
-                <span className="ml-auto px-1.5 py-0.5 bg-[#9b87f5]/20 rounded text-xs font-semibold text-[#9b87f5]">New</span>
+                <span className="ml-auto px-1.5 py-0.5 bg-white/20 rounded text-xs font-semibold">New</span>
               )}
             </Link>
           );
         })}
       </div>
       
-      <div className="p-2.5 border-t border-sidebar-border">
-        <div className="bg-sidebar-accent/30 rounded-md p-2 mb-2">
+      <div className="p-3 border-t">
+        <div className="bg-sidebar-accent/50 rounded-lg p-2.5 mb-2">
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs font-medium">Credit Balance</span>
             <span className="text-xs font-bold">{creditBalance}%</span>
           </div>
-          <Progress value={creditBalance} className="h-1.5" indicatorClassName="bg-[#9b87f5]" />
+          <Progress value={creditBalance} className="h-1.5" />
           {(isSidebarOpen || isMobile) && (
             <div className="flex justify-between items-center mt-2">
               <span className="text-xs text-sidebar-foreground/70">Remaining</span>
@@ -119,26 +119,26 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
         {isMobile ? (
           <div>
             <div 
-              className="sidebar-item"
+              className="sidebar-item mb-1"
               onClick={() => setIsSettingsOpen(!isSettingsOpen)}
             >
-              <Settings size={16} />
-              <span>Settings</span>
+              <Settings size={18} />
+              <span>General Settings</span>
               {isSettingsOpen ? 
-                <ChevronUp size={14} className="ml-auto" /> : 
-                <ChevronDown size={14} className="ml-auto" />
+                <ChevronUp size={16} className="ml-auto" /> : 
+                <ChevronDown size={16} className="ml-auto" />
               }
             </div>
             
             {isSettingsOpen && (
-              <div className="pl-2 menu-animation mt-0.5">
+              <div className="pl-3 menu-animation">
                 {settingsMenuItems.map((item) => (
                   <Link
                     key={item.id}
                     to={item.path}
-                    className="sidebar-item mb-0.5"
+                    className="sidebar-item mb-1"
                   >
-                    <item.icon size={14} />
+                    <item.icon size={16} />
                     <span>{item.label}</span>
                   </Link>
                 ))}
@@ -148,10 +148,10 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
         ) : isSidebarOpen ? (
           <Popover>
             <PopoverTrigger asChild>
-              <div className="sidebar-item cursor-pointer">
-                <Settings size={16} />
-                <span>Settings</span>
-                <ChevronUp size={14} className="ml-auto" />
+              <div className="sidebar-item mb-1 cursor-pointer">
+                <Settings size={18} />
+                <span>General Settings</span>
+                <ChevronUp size={16} className="ml-auto" />
               </div>
             </PopoverTrigger>
             <PopoverContent className="w-56 p-0" align="end" side="top">
@@ -160,9 +160,9 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
                   <Link
                     key={item.id}
                     to={item.path}
-                    className="flex items-center gap-2.5 px-2.5 py-1.5 text-sm cursor-pointer hover:bg-sidebar-accent transition-colors"
+                    className="flex items-center gap-3 px-3 py-2 text-sm cursor-pointer hover:bg-sidebar-accent transition-colors"
                   >
-                    <item.icon size={14} />
+                    <item.icon size={16} />
                     <span>{item.label}</span>
                   </Link>
                 ))}
@@ -171,7 +171,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
           </Popover>
         ) : (
           <div className="flex justify-center">
-            <Settings size={16} className="cursor-pointer" />
+            <Settings size={18} className="cursor-pointer" />
           </div>
         )}
       </div>
