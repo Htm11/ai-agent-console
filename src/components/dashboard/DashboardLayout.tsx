@@ -41,7 +41,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       
       {/* Sidebar for mobile */}
       {isMobile && isMobileSidebarOpen && (
-        <div className="fixed inset-0 bg-black/50 z-30" onClick={toggleMobileSidebar}></div>
+        <div className="fixed inset-0 bg-black/40 z-30 backdrop-blur-sm" onClick={toggleMobileSidebar}></div>
       )}
       
       {isMobile && (
@@ -53,7 +53,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       )}
       
       <main className="flex-1 overflow-y-auto">
-        <div className="sticky top-0 z-10 bg-background">
+        <div className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm">
           <div className="p-3 flex items-center border-b">
             {!isMobile && (
               <button 
@@ -73,8 +73,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               </button>
             )}
             
-            <div className="ml-3">
-              <h1 className="text-lg font-semibold">AI Voice Agents Dashboard</h1>
+            <div className="ml-2">
+              <h1 className="text-lg font-medium">AI Voice Agents Dashboard</h1>
             </div>
           </div>
         </div>

@@ -35,12 +35,12 @@
  
     --radius: 0.5rem;
 
-    --sidebar: 0 0% 98%;
-    --sidebar-foreground: 240 10% 3.9%;
-    --sidebar-border: 240 5.9% 90%;
-    --sidebar-accent: 240 4.8% 93%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-ring: 240 10% 3.9%;
+    --sidebar: 260 30% 16%; /* Dark purple for sidebar */
+    --sidebar-foreground: 240 10% 97%;
+    --sidebar-border: 260 20% 22%;
+    --sidebar-accent: 260 25% 22%;
+    --sidebar-accent-foreground: 240 5.9% 98%;
+    --sidebar-ring: 240 10% 92%;
   }
  
   .dark {
@@ -72,10 +72,10 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
 
-    --sidebar: 240 6% 10%;
-    --sidebar-foreground: 0 0% 93%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-accent: 240 4% 16%;
+    --sidebar: 260 30% 12%; /* Darker purple for sidebar in dark mode */
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-border: 260 20% 18%;
+    --sidebar-accent: 260 25% 18%;
     --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-ring: 240 4.9% 83.9%;
   }
@@ -106,7 +106,7 @@
 
 /* Sidebar styles */
 .sidebar-item {
-  @apply flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground;
+  @apply flex items-center gap-2.5 px-2.5 py-1.5 rounded-md cursor-pointer transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm;
 }
 
 .sidebar-item.active {
@@ -127,3 +127,4 @@
     transform: translateY(0);
   }
 }
+
