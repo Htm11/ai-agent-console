@@ -54,28 +54,30 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       
       <main className="flex-1 overflow-y-auto">
         <div className="sticky top-0 z-10 bg-background">
-          <div className="p-2 flex items-center border-b">
-            {!isMobile && (
-              <button 
-                onClick={toggleDesktopSidebar}
-                className="p-1 rounded-md hover:bg-muted transition-colors"
-              >
-                {isSidebarOpen ? <ChevronLeft size={12} /> : <ChevronRight size={12} />}
-              </button>
-            )}
-            
-            {isMobile && (
-              <button 
-                onClick={toggleMobileSidebar}
-                className="p-1 rounded-md hover:bg-muted transition-colors"
-              >
-                <ChevronRight size={12} />
-              </button>
-            )}
-            
-            <div className="ml-2">
+          <div className="px-4 py-3 flex items-center justify-between border-b">
+            <div className="flex items-center gap-2">
+              {!isMobile && (
+                <button 
+                  onClick={toggleDesktopSidebar}
+                  className="p-1.5 rounded-md hover:bg-muted transition-colors"
+                >
+                  {isSidebarOpen ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+                </button>
+              )}
+              
+              {isMobile && (
+                <button 
+                  onClick={toggleMobileSidebar}
+                  className="p-1.5 rounded-md hover:bg-muted transition-colors"
+                >
+                  <ChevronRight size={16} />
+                </button>
+              )}
+              
               <h1 className="text-sm font-semibold">Callab AI Dashboard</h1>
             </div>
+            
+            {/* You can add user profile or additional header elements here */}
           </div>
         </div>
         
