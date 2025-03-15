@@ -54,13 +54,13 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       
       <main className="flex-1 overflow-y-auto">
         <div className="sticky top-0 z-10 bg-background">
-          <div className="p-4 flex items-center border-b">
+          <div className="p-3 flex items-center border-b">
             {!isMobile && (
               <button 
                 onClick={toggleDesktopSidebar}
                 className="p-1 rounded-md hover:bg-muted transition-colors"
               >
-                {isSidebarOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+                {isSidebarOpen ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
               </button>
             )}
             
@@ -69,17 +69,17 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 onClick={toggleMobileSidebar}
                 className="p-1 rounded-md hover:bg-muted transition-colors"
               >
-                <ChevronRight size={18} />
+                <ChevronRight size={16} />
               </button>
             )}
             
-            <div className="ml-4">
-              <h1 className="text-xl font-semibold">AI Voice Agents Dashboard</h1>
+            <div className="ml-3">
+              <h1 className="text-lg font-semibold">AI Voice Agents Dashboard</h1>
             </div>
           </div>
         </div>
         
-        <div className="p-6 animate-fade-in">
+        <div className="p-4 animate-fade-in">
           {children}
         </div>
       </main>

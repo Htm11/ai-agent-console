@@ -72,7 +72,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
         )}
       </div>
       
-      <div className="px-2 py-3 flex-1 overflow-y-auto menu-animation">
+      <div className="px-2 py-2 flex-1 overflow-y-auto menu-animation">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;
           return (
@@ -102,7 +102,7 @@ const Sidebar = ({ isMobile, isSidebarOpen, toggleSidebar }: SidebarProps) => {
       </div>
       
       <div className="p-3 border-t">
-        <div className="bg-sidebar-accent rounded-lg p-3 mb-3">
+        <div className="bg-sidebar-accent/50 rounded-lg p-2.5 mb-2">
           <div className="flex justify-between items-center mb-1">
             <span className="text-xs font-medium">Credit Balance</span>
             <span className="text-xs font-bold">{creditBalance}%</span>
